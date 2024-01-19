@@ -49,7 +49,7 @@ const Plot = ({ size = 500, radius = 50, point }) => {
         transform: 'translate(-50%, -50%)'
     };
 
-    let cartesianGrid = generateGrid(1, 10, 100);
+    let cartesianGrid = generateGrid(1.5, 10, 100);
     let polarGrid = generatePolarGrid(2, 10, 10, 100);
 
  
