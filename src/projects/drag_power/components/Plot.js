@@ -1,7 +1,16 @@
-import {generateGrid} from '../utils/Grid'
+import {generateGrid, generatePolarGrid} from '../utils/Grid'
+import React, { useState } from 'react';
+
 const math = require('mathjs')
 
+
+
 const Plot = ({ size = 500, radius = 50, point }) => {
+
+
+
+    const [polar, setPolar] = useState(false);
+
     const style = {
         width: `${size}px`,
         height: `${size}px`,
@@ -40,7 +49,8 @@ const Plot = ({ size = 500, radius = 50, point }) => {
         transform: 'translate(-50%, -50%)'
     };
 
-    let grid = generateGrid(1, 10, 100);
+    let cartesianGrid = generateGrid(1, 10, 100);
+    let polarGrid = generatePolarGrid(2, 10, 10, 100);
 
  
 
@@ -50,8 +60,8 @@ const Plot = ({ size = 500, radius = 50, point }) => {
             return math.pow(z, new math.Complex(point[0], point[1]))
         }
 
-        let image  = grid.map(f)
-        let points = image.map(z => [z.re, z.im])
+        let image  = polar ? polarGrid.map(f) : cartesianGrid.map(f);
+        let points = image.map(z => [z.re, z.im]);
 
         
         return points.map((p, index) => {
@@ -72,12 +82,26 @@ const Plot = ({ size = 500, radius = 50, point }) => {
         });
     };
 
+    const togglePolar = () => {
+        
+        setPolar(!polar);
+    };
+
     return (
-        <div style={style}>
-            <div style={horizontalAxisStyle}></div>
-            <div style={verticalAxisStyle}></div>
-            {renderPoints()}
+        <div>
+            <button onClick={togglePolar}>
+                Switch to {polar ? 'Cartesian' : 'Polar'}
+            </button>
+
+            <div style={style}>
+                
+                <div style={horizontalAxisStyle}></div>
+                <div style={verticalAxisStyle}></div>
+                {renderPoints()}
+            </div>
+
         </div>
+        
     );
 };
 
