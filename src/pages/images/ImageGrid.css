@@ -1,0 +1,13 @@
+.image-grid {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.image-grid img {
+  width: 45%;
+  height: auto;
+  object-fit: cover; /* This will make sure images cover the area without stretching */
+}

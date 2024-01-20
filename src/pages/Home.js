@@ -1,8 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import Header from './Header'
+import { Link  } from 'react-router-dom';
+import Header from '../Header'
 
-class HomePage extends React.Component {
+class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -18,9 +18,7 @@ class HomePage extends React.Component {
     return (
       <div>
         <Header />
-        <div style={{
-          margin: '20px'
-        }}>
+        <div>
             <h2>Projects</h2>
             <ul>
               {this.state.projects.map(project => (
@@ -42,4 +40,4 @@ class HomePage extends React.Component {
   }
 }
 
-export default HomePage;
+export default Home;

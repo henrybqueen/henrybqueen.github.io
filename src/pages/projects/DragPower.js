@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import Drag from './Drag';
-import Plot from './Plot';
+import Drag from '../../projects/drag_power/components/Drag';
+import Plot from '../../projects/drag_power/components/Plot';
 import 'katex/dist/katex.min.css';
 import { InlineMath, BlockMath } from 'react-katex';
+import { Link } from 'react-router-dom';
+import Header from '../../Header'
+
 
 const Couple = () => {
     const [point, setPoint] = useState([1, 0]); // Initial state of the point
@@ -33,6 +36,8 @@ const Couple = () => {
 
     return (
         <div>
+            <Header />
+        <div >
             <div style={{
                 display: 'flex', 
                 flexDirection: 'row',
@@ -60,9 +65,13 @@ const Couple = () => {
                     <InlineMath math={'*^p \\colon '}/> is simply the transformation associated with raising a complex number to the <InlineMath math={'p'}/>'th power. Hence, <InlineMath math={'*^2  '}/> 
                     corresponds with squaring, <InlineMath math={'*^3  '}/> with cubing, <InlineMath math={'*^{-1}  '}/> with inversion, and so on. <InlineMath math={'*^i'}/> is less familiar. The red dot on the left plot represents <InlineMath math={'p'}/> and the 
                     right plot is a certain visualization of <InlineMath math={'*^p'}/> and in some ways is like a graph of the function <InlineMath math={'*^p'}/>. For example, for <InlineMath math={'p=2'}/> we see horizontal parabolae, which corresponds
-                    to the parabola we see when we graph the real map <InlineMath math={'f(x)=x^2'}/>.
-                
+                    to the parabola we see when we graph the real map <InlineMath math={'f(x)=x^2'}/>. Since <InlineMath math={'z^1=z'}/>, <InlineMath math={'*^1'}/> is the identity map, which usually looks like <InlineMath math={'f(x)=x'}/>. 
                     </p>
+                    <p>
+                        If <InlineMath math={'p=1'}/> we see a simple grid, which is what I'm using to create this animation. The right plot is plotting the points <InlineMath math={'g^p'}/> where <InlineMath math={'g'}/> is 
+                        a point on the grid. When <InlineMath math={'p=1'}/> we see the grid itself. When <InlineMath math={'p=2'}/> we see the "square" of the grid, and so on.
+                    </p>
+                    <InlineMath math={''}/>
 
                 </div>
 
@@ -70,6 +79,8 @@ const Couple = () => {
               
             </div>
         </div>
+        </div>
+        
     );
 };
 
