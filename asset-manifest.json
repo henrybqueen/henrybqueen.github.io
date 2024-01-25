@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.a56309b3.css",
-    "main.js": "/static/js/main.0ead1def.js",
+    "main.css": "/static/css/main.72076875.css",
+    "main.js": "/static/js/main.1507ed42.js",
     "static/js/787.b481bfbf.chunk.js": "/static/js/787.b481bfbf.chunk.js",
     "static/media/KaTeX_AMS-Regular.ttf": "/static/media/KaTeX_AMS-Regular.853be92419a6c3766b9a.ttf",
     "static/media/KaTeX_Main-Regular.ttf": "/static/media/KaTeX_Main-Regular.9eba1d77abcf2aa6e94e.ttf",
@@ -37,6 +37,7 @@
     "static/media/KaTeX_Typewriter-Regular.woff2": "/static/media/KaTeX_Typewriter-Regular.c295e7f71970f03c0549.woff2",
     "static/media/KaTeX_Fraktur-Bold.woff": "/static/media/KaTeX_Fraktur-Bold.354501bac435c3264834.woff",
     "static/media/KaTeX_Fraktur-Regular.woff": "/static/media/KaTeX_Fraktur-Regular.6fdf0ac577be0ba82a4c.woff",
+    "static/media/CameraObscuraDEMO.otf": "/static/media/CameraObscuraDEMO.1b58d43438ec690c3dec.otf",
     "static/media/KaTeX_Caligraphic-Bold.ttf": "/static/media/KaTeX_Caligraphic-Bold.7489a2fbfb9bfe704420.ttf",
     "static/media/KaTeX_Caligraphic-Regular.ttf": "/static/media/KaTeX_Caligraphic-Regular.7e873d3833eb108a0758.ttf",
     "static/media/KaTeX_SansSerif-Regular.woff": "/static/media/KaTeX_SansSerif-Regular.02271ec5cb9f5b4588ac.woff",
@@ -64,12 +65,12 @@
     "static/media/KaTeX_Size3-Regular.woff": "/static/media/KaTeX_Size3-Regular.7947224e8a9914fa332b.woff",
     "static/media/KaTeX_Size3-Regular.woff2": "/static/media/KaTeX_Size3-Regular.e1951519f6f0596f7356.woff2",
     "index.html": "/index.html",
-    "main.a56309b3.css.map": "/static/css/main.a56309b3.css.map",
-    "main.0ead1def.js.map": "/static/js/main.0ead1def.js.map",
+    "main.72076875.css.map": "/static/css/main.72076875.css.map",
+    "main.1507ed42.js.map": "/static/js/main.1507ed42.js.map",
     "787.b481bfbf.chunk.js.map": "/static/js/787.b481bfbf.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.a56309b3.css",
-    "static/js/main.0ead1def.js"
+    "static/css/main.72076875.css",
+    "static/js/main.1507ed42.js"
   ]
 }
