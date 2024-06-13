@@ -78,23 +78,29 @@ void main() {
 
 const Plane = () => {
 
-    const canvasRef = useRef();
+    const canvasRef = useRef<HTMLCanvasElement>(null);
 
     const [scale, setScale] = useState(0);
 
-    function handleWheel(e) {
+    function handleWheel(e: React.WheelEvent) {
 
-        const rect = canvasRef.current.getBoundingClientRect();
-        const mouseX = e.clientX - rect.left;
-        const mouseY = e.clientY - rect.top;
+        if (canvasRef.current) {
 
-        const normX = (2 * mouseX - rect.width) / rect.width;
-        const normY = (-2 * mouseY + rect.height) / rect.height;
+            const rect = canvasRef.current.getBoundingClientRect();
+            const mouseX = e.clientX - rect.left;
+            const mouseY = e.clientY - rect.top;
+    
+            const normX = (2 * mouseX - rect.width) / rect.width;
+            const normY = (-2 * mouseY + rect.height) / rect.height;
+    
+            console.log(`Scroll delta: ${e.deltaY}`);
+            console.log(`normalized coordinates: (${normX}, ${normY})`);
+    
+            setScale(prev => prev + e.deltaY * 0.005);
 
-        console.log(`Scroll delta: ${e.deltaY}`);
-        console.log(`normalized coordinates: (${normX}, ${normY})`);
+        }
 
-        setScale(prev => prev + e.deltaY * 0.005);
+
     }
 
 
@@ -103,7 +109,8 @@ const Plane = () => {
     const r = 1.0;
     const numPoints = (2 * n + 1) * (2 * n + 1);
     const points = generateGrid(n, r);
-    const ref = useRef();
+
+    const shaderRef = useRef<THREE.ShaderMaterial>(null);
 
     const { power } = useControls({
         power: {
@@ -119,9 +126,10 @@ const Plane = () => {
     }), []);
 
     useEffect(() => {
-        if (ref.current) {
-            ref.current.material.uniforms.p.value.set(power.x, power.y);
-            ref.current.material.uniforms.scale.value = scale;
+        if (shaderRef.current) {
+
+            shaderRef.current.uniforms.p.value.set(power.x, power.y);
+            shaderRef.current.uniforms.scale.value = scale;
         }
     }, [power, scale]);
 
@@ -135,7 +143,7 @@ const Plane = () => {
         >
             <ambientLight intensity={Math.PI / 2} />
             <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} decay={0} intensity={Math.PI} />
-            <points ref={ref}>
+            <points>
                 <bufferGeometry>
                     <bufferAttribute
                         attach="attributes-position"
@@ -149,6 +157,7 @@ const Plane = () => {
                     fragmentShader={fragmentShader}
                     uniforms={uniforms}
                     side={THREE.DoubleSide}
+                    ref={shaderRef}
                 />
             </points>
         </Canvas>

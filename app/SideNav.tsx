@@ -44,7 +44,7 @@ export default function SideNav({title, links}: SideNavProps) {
                 <ul className="border-l space-y-2">
 
                     {links.map((link, index) => (
-                        <li>
+                        <li key={index}>
                             <SideNavLink href={link.href}>{link.name}</SideNavLink>
                         </li>
                     ))}

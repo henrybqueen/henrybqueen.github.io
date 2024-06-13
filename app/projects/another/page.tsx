@@ -100,19 +100,29 @@ function Triangle({ a, b, c }: TriangleProps) {
 
 export default function Page() {
 
-    const ref = useRef();
+    const ref = useRef<HTMLCanvasElement>(null);
+
+    const uniforms = {
+        scale: {value: 0}
+    };
 
 
-    function handleWheel(e) {
-        const rect = ref.current.getBoundingClientRect();
-        const mouseX = e.clientX - rect.left;
-        const mouseY = e.clientY - rect.top;
+    function handleWheel(e: React.WheelEvent) {
 
-        const normX = (2 * mouseX - rect.width) / rect.width;
-        const normY = (-2 * mouseY + rect.height) / rect.height;
+        if (ref.current) {
 
-        console.log(`Scroll delta: ${e.deltaY}`);
-        console.log(`normalized coordinates: (${normX}, ${normY})`);
+            const rect = ref.current.getBoundingClientRect();
+            const mouseX = e.clientX - rect.left;
+            const mouseY = e.clientY - rect.top;
+    
+            const normX = (2 * mouseX - rect.width) / rect.width;
+            const normY = (-2 * mouseY + rect.height) / rect.height;
+    
+            console.log(`Scroll delta: ${e.deltaY}`);
+            console.log(`normalized coordinates: (${normX}, ${normY})`);
+
+        }
+
     }
 
 

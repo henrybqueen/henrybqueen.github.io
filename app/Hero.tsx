@@ -1,16 +1,23 @@
 'use client'
 import { Canvas, useFrame } from "@react-three/fiber";
-import { MeshPhongMaterial } from "three";
-import { useRef } from 'react';
+import { MeshPhongMaterial, Mesh, Vector3 } from "three";
+import { ReactNode, useRef } from 'react';
 
 import { Text3D } from "@react-three/drei"
 
-function RotatingMesh({ geometry, position }) {
-    const meshRef = useRef();
+function RotatingMesh({ geometry, position }: {geometry: ReactNode, position: Vector3}) {
+
+    const meshRef = useRef<Mesh>(null);
 
     useFrame(() => {
-        meshRef.current.rotation.x += 0.002;
-        meshRef.current.rotation.y += 0.002;
+
+        if (meshRef.current) {
+
+            meshRef.current.rotation.x += 0.002;
+            meshRef.current.rotation.y += 0.002;
+
+        }
+
     });
 
     return (
@@ -33,7 +40,7 @@ function Animation() {
     return (
         <>
             {shapes.map((shape, index) => (
-                <RotatingMesh key={index} geometry={shape.geometry} position={shape.position} />
+                <RotatingMesh key={index} geometry={shape.geometry} position={new Vector3(shape.position[0], shape.position[1], shape.position[2])} />
             ))}
         </>
     );
@@ -42,10 +49,13 @@ function Animation() {
 
 function Letter({character, index}: {character: string, index: number}) {
 
-    const ref = useRef();
+    const ref = useRef<Mesh>(null);
 
     useFrame(() => {
-        ref.current.rotation.y += index != 0 ? 0.002 * index : 0.002;
+        if (ref.current) {
+            ref.current.rotation.y += index != 0 ? 0.002 * index : 0.002;
+        }
+        
     })
 
     return (
