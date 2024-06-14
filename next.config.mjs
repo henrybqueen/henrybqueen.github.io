@@ -1,13 +1,13 @@
-/** @type {import('next').NextConfig} */
+/**
+* @type {import('next').NextConfig}
+*/
 const nextConfig = {
-  output: 'export',
-  trailingSlash: true,
+  output: "export",
   images: {
-    unoptimized: true,
+    loader: "akamai",
+    path: "",
   },
-  basePath: '/henrybqueen.github.io',
-  assetPrefix: '/henrybqueen.github.io/',
+  assetPrefix: "./",
 };
-
 
 export default nextConfig;
