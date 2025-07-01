@@ -6,16 +6,100 @@
   <title>My Lightweight Site</title>
   <link rel="stylesheet" href="/style.css" />
 </head>
-<body>
+<body
 
-    <h1>Branching Surfaces</h1>
-    <p>Their limbs carry us and our limbs fill them. I'm thinking of roads and pants. </p>
-    <p>Goal: to represent the surfaces of trees and develop models of their genesis. How can we grow these surfaces in our computers?</p>
-    <h1>Roots of Unity</h1>
-    <p>This is what came first to mind. The graph of the polynomial f(z)=|z^n-1|^2</p>
+style="font-size: larger"
 
-    <canvas style="display: block; height: 800px; width:800px; background-color: black;" id="canvas"></canvas>
-    <script type="module" src="roots.js"></script>
+>
+
+    <style>
+        h2 {
+            text-align: center;
+        }
+    </style>
+
+    <div style="max-width: 800px; margin: 5vh auto; padding: 1.5rem;">  
+        <h1 style="text-align: center;">Journal</h1>
+
+        <h2 >I</h1>
+        <p><i>Branching Surfaces. </i>Their limbs carry us and our limbs fill them. I'm thinking of roads and pants. </p>
+        <p>Goal: to represent the surfaces of trees and develop models of their genesis. How can we grow these surfaces in our computers?</p>
+        <h2>II</h1>
+        <p><i>Roots of Unity. </i>This is what came first to mind. The graph of the polynomial \(f(z)=|z^2-1|^2\). This is a polynomial: 
+        
+            \[ 
+            
+            \begin{align}
+            
+                f(z) &= |(x+iy)^2-1|^2   \\
+                        &= |(x^2-y^2-1)+i(2xy)|^2 \\
+                        &= (x^2-y^2-1)^2 + (2xy)^2. \\
+            \end{align}
+
+            \]
+
+            That is, f is a real polynomial of two real coefficients
+
+            \[ f(x, y) = (x^2-y^2-1)^2 + (2xy)^2. \]
+        
+        </p>
+
+        <canvas style="display: block; height: 800px; width:800px; background-color: black;" id="canvas"></canvas>
+        <script type="module" src="roots.js"></script>
+
+
+
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        <script id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+        </script>
+
+
+        <h2>III</h2>
+        <p>
+
+
+
+            \[
+
+            \begin{align}
+            
+                f_{i, j} &= \sum_{n=0}^\infty{\frac{x^{n * i + j}}{(n * i + j)!}}  \\
+            
+            
+
+           
+          
+            e^x &= f_{1, 0} \\
+
+           \cosh x &= f_{2, 0} \\
+
+            \sinh x &= f_{2, 1} \\
+            \cos x &= f_{4, 0} - f_{4, 2} \\
+            \sin x &= f_{4, 1} - f_{4, 3} \\
+
+             f_{1, 0} &= \sum_{j=0}^{i-1}{f_{i, j}}  \\
+
+            \end{align}
+
+            \]
+
+        </p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
 
 
 

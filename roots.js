@@ -183,6 +183,8 @@ uniform float M;
 
 out float z;
 
+
+
 uniform float rotx;
 uniform float roty;
 
@@ -198,7 +200,7 @@ void main() {
     z = scale * (2.0 * (position.y / (M - 1.0)) - 1.0);
 
     float y = (x * x - z * z - 1.0) * (x * x - z * z - 1.0) + (2.0 * x * z) * (2.0 * x * z) ;
-    y *= 2.0;
+    y *= 4.0;
 
     float B = rotx * 0.01;
     float A = roty * 0.01;
@@ -221,7 +223,13 @@ void main() {
     z += 4.0;
 
 
+
     gl_Position = vec4(x / z, y / z, 1.0 / z, 1.0);
+        
+
+
+
+    
 
 }
 `
@@ -232,10 +240,12 @@ precision highp float;
 
 in float z;
 
+
 out vec4 outColor;
 
 void main() {
-    outColor = vec4(vec3(1.0 + atan(-z * 0.25)), 1.0);
+
+    outColor = vec4(vec3(1.0 + atan(-z * 0.0)), 1.0);
 }
 `
 
