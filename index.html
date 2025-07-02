@@ -113,8 +113,22 @@ style="font-size: larger"
 
         <p>
             Hmmmm. I was able resolve the issue if both vertices of an edge are clipped, but still struggling with the boundary, where only one vertex is clipped. Also, I did away with the diagonal edges for aesthetic reasons. The easiest solution may be to 
-            guarantee that the mesh never needs clipping...
+            guarantee that the mesh never needs clipping... 
         </p>
+
+        <p>
+            The general construcion is \(f(z)=|z^n-1|^2\). The graph will be a surface with \(n\) branches, corresponding to the \(n\) roots of the polynomial \(z^n-1\), the \(n\)th roots of unity. Here is the case of \(n=3\), where
+
+            \[
+                f(x, y) = (x^3-3xy^2-1)^2+(3x^2y-y^3)^2.
+            \]
+        </p>
+
+        <canvas style="display: block; height: 800px; width:800px; border: 2px solid black" id="canvas4"></canvas>
+        <script type="module" src="shirt.js"></script>
+
+
+
 
 
 
