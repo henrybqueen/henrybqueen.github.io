@@ -1,61 +1,21 @@
 
 
 /** @type {HTMLCanvasElement} */
-const canvas = document.getElementById("canvas");
+const canvas = document.getElementById("canvas2");
 
 canvas.width = canvas.clientWidth * window.devicePixelRatio;
 canvas.height = canvas.clientHeight * window.devicePixelRatio;
 
-const gl = canvas.getContext("webgl2", {antialias: true});
+const gl = canvas.getContext("webgl2", {antialias: true, depth: true});
+
+gl.enable(gl.DEPTH_TEST);
 
 gl.getExtension('OES_element_index_uint');
 
 
-const N = 50;
-const M = 50;
+const N = 13;
+const M = 13;
 
-let r = 0;
-const f = 4;
-
-
-
-let tindex = 0;
-
-const buffer = new Float32Array(2);
-
-
-const texture = gl.createTexture();
-gl.bindTexture(gl.TEXTURE_2D, texture);
-
-// allocate memory for the texture
-gl.texImage2D(
-    gl.TEXTURE_2D,
-    0,
-    gl.RG32F,
-    N,
-    1,
-    0,
-    gl.RG,
-    gl.FLOAT,
-    null
-)
-
-/*
-
-
-these are necessary. Before I added them, nothing was being rendered. Not sure why, chatgpt is suggesting that the shader
-did not 'consider the texture to be complete' and so the texture() method was returning vec4(0.0) everytime.
-
-*/
-gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
-gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
-
-
-
-
-let shifted = false;
 let lastx = null;
 let lasty = null;
 let rotx = 0;
@@ -173,73 +133,82 @@ gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
 
 
 
-const vertex_source = `#version 300 es
-precision highp float;
+    const vertex_source = `#version 300 es
+    precision highp float;
 
-layout(location = 0) in vec2 position;
+    layout(location = 0) in vec2 position;
 
-uniform float N;
-uniform float M;
+    uniform float N;
+    uniform float M;
 
-out float z;
-
-
-
-uniform float rotx;
-uniform float roty;
-
-
-const float PI = 3.14159265359;
-
-
-void main() {
-
-    float scale = 2.0;
-
-    float x = scale * (2.0 * (position.x / (N - 1.0)) - 1.0);
-    z = scale * (2.0 * (position.y / (M - 1.0)) - 1.0);
-
-    float y = (x * x - z * z - 1.0) * (x * x - z * z - 1.0) + (2.0 * x * z) * (2.0 * x * z) ;
-    y *= 4.0;
-
-    float theta = 0.01 * rotx;
-    float phi = 0.01 * roty;
-
-
-    mat3 A = mat3(
-        cos(theta), 0.0, sin(theta),
-        0.0, 1.0, 0.0,
-        -sin(theta), 0, cos(theta)
-    );
-
-    mat3 B = mat3(
-        cos(phi), sin(phi), 0.0,
-        -sin(phi), cos(phi), 0.0,
-        0.0, 0.0, 1.0
-    );
-
-
-    vec3 v = A * B * vec3(x, y, z);
-
-    x = v.x;
-    y = v.y;
-    z = v.z;
+    out float z;
 
 
 
-    z += 4.0;
+    uniform float rotx;
+    uniform float roty;
+
+
+    const float PI = 3.14159265359;
+
+
+    void main() {
+
+        float u = 2.0 * PI * (position.x / (N-1.0));
+        float v = 1.0 * PI * (position.y / (M-1.0));
+
+        vec3 p;
+
+        p.x = cos(u) * sin(v);
+        p.y = cos(v);
+        p.z = sin(u) * sin(v);
+
+
+        float theta = 0.005 * roty;
+        float phi = 0.005 * rotx;
+
+        // phi = azimuth (horizontal orbit) → rotate around Y axis
+        mat3 R_azimuth = mat3(
+            cos(phi), 0.0, sin(phi),
+            0.0, 1.0, 0.0,
+        -sin(phi), 0.0, cos(phi)
+        );
+
+        // theta = elevation (vertical orbit) → rotate around X axis
+        mat3 R_elevation = mat3(
+            1.0, 0.0, 0.0,
+            0.0, cos(theta), -sin(theta),
+            0.0, sin(theta),  cos(theta)
+        );
+
+        // Apply elevation *after* azimuth
+        p = R_elevation * R_azimuth * p;
 
 
 
-    gl_Position = vec4(x / z, y / z, 1.0 / z, 1.0);
+        p.z += 2.0;
+
+
+        float x = p.x;
+        float y = p.y;
+        z = p.z;
+
+
+
+        gl_Position = vec4(x / z, y / z, z / 100.0, 1.0);
+        //gl_Position = vec4(x, y, z, z); // allows real perspective divide + depth
+        //gl_Position = vec4(p.x, p.y, -p.z, 1.0);
+       
+
+
+            
+
+
+
         
 
-
-
-    
-
-}
-`
+    }
+    `
 
 
 const fragment_source = `#version 300 es
@@ -252,7 +221,9 @@ out vec4 outColor;
 
 void main() {
 
-    outColor = vec4(vec3(1.0 + atan(-z * 0.0)), 1.0);
+    outColor = vec4(vec3(atan(0.3 * z)), 1.0);
+    //outColor = vec4(vec3(gl_FragCoord.z), 1.0);
+
 }
 `
 
@@ -263,7 +234,7 @@ gl.uniform1f(gl.getUniformLocation(program, "N"), N);
 gl.uniform1f(gl.getUniformLocation(program, "M"), M);
 
 
-gl.clearColor(0.0, 0.0, 0.0, 1.0);
+gl.clearColor(1.0, 1.0, 1.0, 1.0);
 
 function render(time) {
 

@@ -38,7 +38,7 @@ style="font-size: larger"
 
             \]
 
-            That is, f is a real polynomial of two real coefficients
+            That is, \(f \) is a real polynomial of two real variables
 
             \[ f(x, y) = (x^2-y^2-1)^2 + (2xy)^2. \]
         
@@ -49,7 +49,6 @@ style="font-size: larger"
 
 
 
-        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
         <script id="MathJax-script" async
         src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
         </script>
@@ -84,14 +83,38 @@ style="font-size: larger"
 
             \]
 
+
+
+            <h2>IV</h2>
+
+            What am I doing with this Journal? I am getting started. I have ideas that I would like to share with you, dear reader. Why would I wait for the perfect website to begin sharing? Isn't this an inverse relationship?
+            Isn't the proper order to being sharing and then, and only then, to refine, again and again, to refine? So let me begin. Let me learn by doing and do by learning. If there really is a such a thing as a 'best practice,' then 
+            bad practice will surely let me know. Let me learn for myself <i>why</i> React exists, and until I have, I'll use plain html.  
+
+
+
         </p>
 
 
+        <h2>V</h2>
+        <p>Clearly there are lots of problems with my rendering above. As a start, lets figure out how to implement 'orbit controls.'</p>
 
 
+        <canvas style="display: block; height: 800px; width:800px; border: 2px solid black" id="canvas2"></canvas>
+        <script type="module" src="orbit.js"></script>
+        <p>Alright, I think I got the orbit controls working. I also managed to hack depth-testing and add a fog-effect to improve visibility. Now Let's see if I can render the graph 
+            of II without clipping issues. Also, putting all these canvases on the same page has taught me that all scripts share the same namespace unless they are marked as 'modules.'
+
+        </p>
+
+        <canvas style="display: block; height: 800px; width:800px; border: 2px solid black" id="canvas3"></canvas>
+        <script type="module" src="pants.js"></script>
 
 
-
+        <p>
+            Hmmmm. I was able resolve the issue if both vertices of an edge are clipped, but still struggling with the boundary, where only one vertex is clipped. Also, I did away with the diagonal edges for aesthetic reasons. The easiest solution may be to 
+            guarantee that the mesh never needs clipping...
+        </p>
 
 
 
