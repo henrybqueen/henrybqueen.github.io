@@ -13,126 +13,33 @@ style="font-size: larger"
 >
 
     <style>
-        h2 {
+        h2, h3 {
             text-align: center;
+            font-style: italic;
         }
     </style>
 
-    <div style="max-width: 800px; margin: 5vh auto; padding: 1.5rem;">  
-        <h1 style="text-align: center;">Journal</h1>
-
-        <h2 >I</h1>
-        <p><i>Branching Surfaces. </i>Their limbs carry us and our limbs fill them. I'm thinking of roads and pants. </p>
-        <p>Goal: to represent the surfaces of trees and develop models of their genesis. How can we grow these surfaces in our computers?</p>
-        <h2>II</h1>
-        <p><i>Roots of Unity. </i>This is what came first to mind. The graph of the polynomial \(f(z)=|z^2-1|^2\). This is a polynomial: 
-        
-            \[ 
-            
-            \begin{align}
-            
-                f(z) &= |(x+iy)^2-1|^2   \\
-                        &= |(x^2-y^2-1)+i(2xy)|^2 \\
-                        &= (x^2-y^2-1)^2 + (2xy)^2. \\
-            \end{align}
-
-            \]
-
-            That is, \(f \) is a real polynomial of two real variables
-
-            \[ f(x, y) = (x^2-y^2-1)^2 + (2xy)^2. \]
-        
-        </p>
-
-        <canvas style="display: block; height: 800px; width:800px; background-color: black;" id="canvas"></canvas>
-        <script type="module" src="roots.js"></script>
-
-
-
-        <script id="MathJax-script" async
+      <script id="MathJax-script" async
         src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-        </script>
+    </script>
 
-
-        <h2>III</h2>
-        <p>
-
-
-
-            \[
-
-            \begin{align}
-            
-                f_{i, j} &= \sum_{n=0}^\infty{\frac{x^{n * i + j}}{(n * i + j)!}}  \\
-            
-            
-
-           
-          
-            e^x &= f_{1, 0} \\
-
-           \cosh x &= f_{2, 0} \\
-
-            \sinh x &= f_{2, 1} \\
-            \cos x &= f_{4, 0} - f_{4, 2} \\
-            \sin x &= f_{4, 1} - f_{4, 3} \\
-
-             f_{1, 0} &= \sum_{j=0}^{i-1}{f_{i, j}}  \\
-
-            \end{align}
-
-            \]
-
-
-
-            <h2>IV</h2>
-
-            What am I doing with this Journal? I am getting started. I have ideas that I would like to share with you, dear reader. Why would I wait for the perfect website to begin sharing? Isn't this an inverse relationship?
-            Isn't the proper order to being sharing and then, and only then, to refine, again and again, to refine? So let me begin. Let me learn by doing and do by learning. If there really is a such a thing as a 'best practice,' then 
-            bad practice will surely let me know. Let me learn for myself <i>why</i> React exists, and until I have, I'll use plain html.  
-
-
-
-        </p>
-
-
-        <h2>V</h2>
-        <p>Clearly there are lots of problems with my rendering above. As a start, lets figure out how to implement 'orbit controls.'</p>
-
-
-        <canvas style="display: block; height: 800px; width:800px; border: 2px solid black" id="canvas2"></canvas>
-        <script type="module" src="orbit.js"></script>
-        <p>Alright, I think I got the orbit controls working. I also managed to hack depth-testing and add a fog-effect to improve visibility. Now Let's see if I can render the graph 
-            of II without clipping issues. Also, putting all these canvases on the same page has taught me that all scripts share the same namespace unless they are marked as 'modules.'
-
-        </p>
-
-        <canvas style="display: block; height: 800px; width:800px; border: 2px solid black" id="canvas3"></canvas>
-        <script type="module" src="pants.js"></script>
-
-
-        <p>
-            Hmmmm. I was able resolve the issue if both vertices of an edge are clipped, but still struggling with the boundary, where only one vertex is clipped. Also, I did away with the diagonal edges for aesthetic reasons. The easiest solution may be to 
-            guarantee that the mesh never needs clipping... 
-        </p>
-
-        <p>
-            The general construcion is \(f(z)=|z^n-1|^2\). The graph will be a surface with \(n\) branches, corresponding to the \(n\) roots of the polynomial \(z^n-1\), the \(n\)th roots of unity. Here is the case of \(n=3\), where
-
-            \[
-                f(x, y) = (x^3-3xy^2-1)^2+(3x^2y-y^3)^2.
-            \]
-        </p>
-
-        <canvas style="display: block; height: 800px; width:800px; border: 2px solid black" id="canvas4"></canvas>
-        <script type="module" src="shirt.js"></script>
-
-
-
-
-
-
-
+    <div style="max-width: 800px; margin: 5vh auto; padding: 1.5rem; text-align: center;">  
+        <h1 style="text-align: center;">
+            Roots of Unity
+        </h1>
+        <h2>Monogon</h1>
+        <h2>Digon</h2>
+        <img src="images/begonia.jpg" height="500" width="auto">
+        <h2>Trigon</h2>
+        <img src="images/africanIris.jpg" height="500" width="auto">
+        <h2>Tetragon</h2>
+        <img src="images/japaneseSpindle.jpg" height="500" width="auto">
+        <h2>Pentagon</h2>
+        <img src="images/narrowleafMilkweed.jpg" height="500" width="auto">
+        <h2>Hexagon</h2>
+        <img src="images/agapanthus.jpg" height="500" width="auto">
+        <h2>Septagon</h2>
+        <h2>Octagon</h2>
 
 
     </div>
